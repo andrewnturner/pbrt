@@ -3,16 +3,7 @@ use std::ops::{Add, AddAssign, Sub, SubAssign, Mul, MulAssign, Div, DivAssign, N
 use num_traits::{Float, Signed};
 
 use super::Num;
-
-#[inline]
-fn min<T: Num>(a: T, b: T) -> T {
-    if a < b { a } else { b }
-}
-
-#[inline]
-fn max<T: Num>(a: T, b: T) -> T {
-    if a > b { a } else { b }
-}
+use super::util::{min, max};
 
 #[derive(Debug, PartialEq)]
 pub struct Vector2<T: Num> {
