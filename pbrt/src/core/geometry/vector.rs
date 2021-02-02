@@ -1,7 +1,8 @@
-use std::ops::{Add, AddAssign, Sub, SubAssign,  Mul, MulAssign, Div, DivAssign, Neg};
-use std::cmp::PartialOrd;
+use std::ops::{Add, AddAssign, Sub, SubAssign, Mul, MulAssign, Div, DivAssign, Neg};
 
-use num_traits::{Num as NumBase, Float, Signed};
+use num_traits::{Float, Signed};
+
+use super::Num;
 
 #[inline]
 fn min<T: Num>(a: T, b: T) -> T {
@@ -13,25 +14,14 @@ fn max<T: Num>(a: T, b: T) -> T {
     if a > b { a } else { b }
 }
 
-pub trait Num: NumBase + PartialOrd + Copy {
-    fn is_nan(&self) -> bool;
-}
-
-impl<T: NumBase + PartialOrd + Copy> Num for T {
-    #[inline]
-    fn is_nan(&self) -> bool {
-        self != self
-    }
-}
-
 #[derive(Debug, PartialEq)]
 pub struct Vector2<T: Num> {
     pub x: T,
     pub y: T,
 }
 
-type Vector2f = Vector2<f64>;
-type Vector2i = Vector2<isize>;
+pub type Vector2f = Vector2<f64>;
+pub type Vector2i = Vector2<isize>;
 
 #[derive(Debug, PartialEq)]
 pub struct Vector3<T: Num> {
@@ -40,8 +30,8 @@ pub struct Vector3<T: Num> {
     pub z: T,
 }
 
-type Vector3f = Vector3<f64>;
-type Vector3i = Vector3<isize>;
+pub type Vector3f = Vector3<f64>;
+pub type Vector3i = Vector3<isize>;
 
 impl<T: Num> Vector2<T> {
     pub fn zero() -> Self {
